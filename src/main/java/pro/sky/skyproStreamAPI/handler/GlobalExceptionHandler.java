@@ -20,6 +20,8 @@ public class GlobalExceptionHandler {
         errorDTO.setMessage(ex.getMessage());
         errorDTO.setStatus(String.valueOf(ex.getStatus().value()));
         errorDTO.setTime(new Date().toString());
+
+
         return new ResponseEntity<ErrorDTO>(errorDTO, ex.getStatus());
     }
 }

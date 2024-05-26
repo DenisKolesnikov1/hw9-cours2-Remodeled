@@ -18,6 +18,10 @@ public class Employee {
         this.id = ++ counter;
     }
 
+    public Employee(String firstName) {
+        return;
+    }
+
     public int getId() {
         return id;
     }

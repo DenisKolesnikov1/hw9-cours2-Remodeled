@@ -1,6 +1,5 @@
 package pro.sky.skyproStreamAPI.Service;
 
-
 import org.springframework.stereotype.Service;
 import pro.sky.skyproStreamAPI.Model.Employee;
 import pro.sky.skyproStreamAPI.exception.EmployeeNotFoundException;
@@ -10,15 +9,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+
 @Service
-public final class EmployeeServiceImpl implements EmployeeService {
+public class DepartmentServiceImpl implements DepartmentService {
 
     private final List<Employee> employees = List.of(
-//            new Employee("Сергей", 1, 2000),
-//            new Employee("Петр", 1, 40000),
-//            new Employee("Николай", 1, 800),
-//            new Employee("Иван", 2, 3000),
-//            new Employee("Иван2", 2, 300000)
+            new Employee("Николай", 1, 2000),
+            new Employee("Петр", 1, 4000),
+            new Employee("Сергей", 1, 800),
+            new Employee("Иван", 2, 3000),
+            new Employee("Федор", 2, 100000)
     );
 
     @Override
@@ -40,7 +40,7 @@ public final class EmployeeServiceImpl implements EmployeeService {
     @Override
     public List<Employee> getAllEmployees(Integer departmentId) {
         return employees.stream()
-                .filter(employee -> employee.getDepartment().equals(departmentId))
+                .filter(employee -> employee.getDepartment()== null || employee.getDepartment().equals(departmentId))
                 .collect(Collectors.toList());
     }
 
@@ -50,22 +50,37 @@ public final class EmployeeServiceImpl implements EmployeeService {
                 .collect(Collectors.groupingBy(Employee::getDepartment));
     }
 
-
     @Override
-    public Map<Integer, List<Employee>> getAllByDepartments() {
-        return Map.of();
-    }
-
-    @Override
-    public Employee add(String firstName, Integer department, Integer salary) {
+    public Employee add(String firstName, int department, int salary) {
         Employee employee = new Employee(firstName, department, salary);
         employees.add(employee);
         return employee;
     }
 
     @Override
+    public Employee find(String firstName, int department, int salary) {
+        return null;
+    }
+
+    @Override
+    public Employee find(String firstName) {
+        Employee newemployee = new Employee(firstName);
+        for (Employee employee : employees) {
+//            if (employee.equals(newemployee)) ;
+            return employee;
+        }
+        throw new EmployeeNotFoundException("сотрудника не смогли найти" + firstName);
+    }
+
+    @Override
     public Employee delete(String firstName, int department, int salary) {
-        Employee newemployee = new Employee(firstName, department, salary);
+        return null;
+    }
+
+
+    @Override
+    public Employee delete(String firstName) {
+        Employee newemployee = new Employee(firstName);
         for (int i = 0; i < employees.size(); i++) {
             Employee employee = employees.get(i);
             if (employee.equals(newemployee)) {
@@ -75,21 +90,11 @@ public final class EmployeeServiceImpl implements EmployeeService {
         }
         return newemployee;
     }
+//    void test() {
+//        Employee employee = find("", 4, 4);
+//        System.out.println(employee.getSalary());
+//    }
 
-    @Override
-    public Employee find(String firstName, int department, int salary) {
-        Employee newemployee = new Employee(firstName, department, salary);
-        for (Employee employee : employees) {
-            if (employee.equals(newemployee)) ;
-            return employee;
-        }
-        throw new EmployeeNotFoundException("сотрудника не смогли найти");
-    }
-
-    void test() {
-        Employee employee = find("", 4, 4);
-        System.out.println(employee.getSalary());
-    }
 
     @Override
     public List<Employee> findAll() {

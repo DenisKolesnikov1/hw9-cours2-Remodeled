@@ -5,23 +5,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pro.sky.skyproStreamAPI.Model.Employee;
-import pro.sky.skyproStreamAPI.Service.EmployeeService;
+import pro.sky.skyproStreamAPI.Service.DepartmentService;
 
 import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/departments")
-public class EmployeeController {
+public class DepartmentController {
 
-    private final EmployeeService employeeService;
+    private final DepartmentService employeeService;
 
-    public EmployeeController(EmployeeService employeeService) {
+    public DepartmentController(DepartmentService employeeService) {
         this.employeeService = employeeService;
     }
 
     @GetMapping("/max-salary")
-    public Employee getEmmployeeWithMaxSalary(@RequestParam Integer departmentId) {
+    public Employee getEmployeeWithMaxSalary(@RequestParam Integer departmentId) {
         return employeeService.getEmployeeWithMaxSalary(departmentId);
     }
 
@@ -30,12 +30,12 @@ public class EmployeeController {
         return employeeService.getEmployeeWithMinSalary(departmentId);
     }
 
-    @GetMapping("/all")
+    @GetMapping(value = "/all", params = "departmentId")
     public List<Employee> getAllEmployees(@RequestParam Integer departmentId) {
         return employeeService.getAllEmployees(departmentId);
     }
 
-    @GetMapping("/all-by-departments")
+    @GetMapping("/by-all-departments")
     public Map<Integer, List<Employee>> getAllEmployeesByDepartments() {
 //        1 - 3 Employee
 //        2 - 2 Employee
