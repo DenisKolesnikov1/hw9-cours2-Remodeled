@@ -3,9 +3,9 @@ package pro.sky.skyproStreamAPI.Model;
 import org.springframework.http.HttpStatusCode;
 
 public class ErrorDTO {
-    public String status;
-    public String message;
-    public String time;
+    private String status;
+    private String message;
+    private String time;
 //    public ErrorDTO ex;
 //    public HttpStatusCode getStatus;
 
