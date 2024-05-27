@@ -20,15 +20,4 @@ public interface DepartmentService {
 
     Map<Integer, List<Employee>> getAllEmployeesByDepartments();
 
-    Employee add(String firstName, int department, int salary);
-
-    Employee find(String firstName, int department, int salary);
-
-    Employee find(String firstName);
-
-    Employee delete(String firstName, int department, int salary);
-
-    Employee delete(String firstName);
-
-    List<Employee> findAll();
 }

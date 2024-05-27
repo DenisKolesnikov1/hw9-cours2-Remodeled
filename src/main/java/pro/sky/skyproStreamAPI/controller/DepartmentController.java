@@ -35,7 +35,7 @@ public class DepartmentController {
         return employeeService.getAllEmployees(departmentId);
     }
 
-    @GetMapping("/by-all-departments")
+    @GetMapping("/all")
     public Map<Integer, List<Employee>> getAllEmployeesByDepartments() {
 //        1 - 3 Employee
 //        2 - 2 Employee
