@@ -14,31 +14,29 @@ import java.util.Map;
 @RequestMapping("/departments")
 public class DepartmentController {
 
-    private final DepartmentService employeeService;
+    private final DepartmentService departmentService;
 
-    public DepartmentController(DepartmentService employeeService) {
-        this.employeeService = employeeService;
+    public DepartmentController(DepartmentService departmentService) {
+        this.departmentService = departmentService;
     }
 
     @GetMapping("/max-salary")
-    public Employee getEmployeeWithMaxSalary(@RequestParam Integer departmentId) {
-        return employeeService.getEmployeeWithMaxSalary(departmentId);
+    public Employee getEmployeeWithMaxSalary(@RequestParam int departmentId) {
+        return departmentService.getEmployeeWithMaxSalary(departmentId);
     }
 
     @GetMapping("/min-salary")
-    public Employee getEmployeeWithMinSalary(@RequestParam Integer departmentId) {
-        return employeeService.getEmployeeWithMinSalary(departmentId);
+    public Employee getEmployeeWithMinSalary(@RequestParam int departmentId) {
+        return departmentService.getEmployeeWithMinSalary(departmentId);
     }
 
     @GetMapping(value = "/all", params = "departmentId")
-    public List<Employee> getAllEmployees(@RequestParam Integer departmentId) {
-        return employeeService.getAllEmployees(departmentId);
+    public List<Employee> getAllEmployees(@RequestParam int departmentId) {
+        return departmentService.getAllEmployees(departmentId);
     }
 
     @GetMapping("/all")
     public Map<Integer, List<Employee>> getAllEmployeesByDepartments() {
-//        1 - 3 Employee
-//        2 - 2 Employee
-        return employeeService.getAllEmployeesByDepartments();
+        return departmentService.getAllEmployeesByDepartments();
     }
 }

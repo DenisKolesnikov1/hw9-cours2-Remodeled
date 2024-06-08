@@ -2,75 +2,57 @@ package pro.sky.skyproStreamAPI.Model;
 
 import java.util.Objects;
 
-public class Employee {
+public final class Employee {
 
-    private int id;
+
     private String name;
-    private Integer department;
-    private Integer salary;
+    private String surname;
+    private int department;
+    private int salary;
 
-    private static int counter;
+    public Employee() {
 
-    public Employee(String name, Integer department, Integer salary) {
-        this.name = name;
-        this.department = department;
-        this.salary = salary;
-        this.id = ++ counter;
     }
 
-    public Employee(String firstName) {
-        return;
-    }
-
-    public int getId() {
-        return id;
-    }
 
     public String getName() {
         return name;
     }
 
-    public Integer getDepartment() {
-        return department;
-    }
-
-    public Integer getSalary() {
-        return salary;
-    }
-
-
     public void setName(String name) {
         this.name = name;
     }
 
+    public String getSurname() {
+        return surname;
+    }
 
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
 
+    public int getDepartment() {
+        return department;
+    }
 
-    public void setDepartment(Integer department) {
+    public void setDepartment(int department) {
         this.department = department;
     }
 
-    public void setSalary(Integer salary) {
+    public int getSalary() {
+        return salary;
+    }
+
+    public void setSalary(int salary) {
         this.salary = salary;
     }
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Employee employee = (Employee) o;
-        return Objects.equals(name, employee.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name);
-    }
+    public Employee(String name, String surname, int department, int salary) {
+        this.name = name;
+        this.surname = surname;
+        this.department = department;
+        this.salary = salary;
 
 
-    @Override
-    public String toString() {
-        return id + " - " + name + " из " + department + " отдела. зп составила " + salary + "рублей.";
     }
 }

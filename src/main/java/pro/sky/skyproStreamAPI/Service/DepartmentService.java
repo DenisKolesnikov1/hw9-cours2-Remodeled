@@ -12,11 +12,11 @@ import java.util.stream.Collectors;
 public interface DepartmentService {
 
 
-    Employee getEmployeeWithMaxSalary(Integer departmentId);
+    Employee getEmployeeWithMaxSalary(int departmentId);
 
-    Employee getEmployeeWithMinSalary(Integer departmentId);
+    Employee getEmployeeWithMinSalary(int departmentId);
 
-    List<Employee> getAllEmployees(Integer departmentId);
+    List<Employee> getAllEmployees(int departmentId);
 
     Map<Integer, List<Employee>> getAllEmployeesByDepartments();
 

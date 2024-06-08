@@ -4,59 +4,53 @@ import org.springframework.stereotype.Service;
 import pro.sky.skyproStreamAPI.Model.Employee;
 import pro.sky.skyproStreamAPI.exception.EmployeeNotFoundException;
 
-import java.util.List;
+import java.util.*;
+
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
 
-    private final List<Employee> employees = List.of(
-            new Employee("Николай", 1, 2000),
-            new Employee("Петр", 1, 4000),
-            new Employee("Сергей", 1, 800),
-            new Employee("Иван", 2, 3000),
-            new Employee("Федор", 2, 100000)
-    );
+    private final Map<String, Employee> employees = new HashMap<>();
+    private String buildKey(String firstName, String lastName) {
+        return firstName + " " + lastName;
+    }
 
 
     @Override
-    public Employee add(String firstName, int department, int salary) {
-        Employee employee = new Employee(firstName, department, salary);
-        employees.add(employee);
+    public Employee add(String firstName, String lastName, int department, int salary) {
+        String key = buildKey(firstName, lastName);
+        if (!employees.containsKey(key)) {
+            throw new EmployeeNotFoundException(key);
+        }
+        Employee employee = new Employee(firstName, lastName, department, salary);
+        employees.put(key, employee);
         return employee;
     }
 
 
     @Override
-    public Employee find(String firstName) {
-        Employee newemployee = new Employee(firstName);
-        for (Employee employee : employees) {
-//            if (employee.equals(newemployee)) ;
-            return employee;
+    public Employee find(String firstName, String lastName) {
+        String key = buildKey(firstName, lastName);
+        if (!employees.containsKey(key)) {
+            throw new EmployeeNotFoundException(key);
         }
-        throw new EmployeeNotFoundException("сотрудника не смогли найти" + firstName);
+        return employees.get(key);
+    }
+
+
+
+    @Override
+    public Employee delete(String firstName, String lastName) {
+        String key = buildKey(firstName, lastName);
+        if (!employees.containsKey(key)) {
+            throw new EmployeeNotFoundException(key);
+        }
+        return employees.remove(key);
     }
 
 
     @Override
-    public Employee delete(String firstName) {
-        Employee newemployee = new Employee(firstName);
-        for (int i = 0; i < employees.size(); i++) {
-            Employee employee = employees.get(i);
-            if (employee.equals(newemployee)) {
-                employees.remove(i);
-                //               return true;
-            }
-        }
-        return newemployee;
-    }
-//    void test() {
-//        Employee employee = find("", 4, 4);
-//        System.out.println(employee.getSalary());
-//    }
-
-
-    @Override
-    public List<Employee> findAll() {
-        return employees;
+    public Collection<Employee> findAll() {
+        return employees.values();
     }
 }
